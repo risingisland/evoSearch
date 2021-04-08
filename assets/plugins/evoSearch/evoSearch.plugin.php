@@ -5,9 +5,9 @@ $e = $modx->Event;
 if ($e->name == 'OnDocFormSave') {
     include_once('plugin.class.php');
     $eSP = new evoSearchPlugin($modx, $e->params);
-    //проверяем наличие и создаем при необходимости нужные поля и индекса
+    //we check the availability and create, if necessary, the necessary fields and indexes
     $eSP->prepareRun();
-    //теперь начинаем работу
+    //now we start work
     $sql = $eSP->makeSQLForSelectWords();
     //echo $sql;die();
     $q = $modx->db->query($sql);
@@ -33,6 +33,6 @@ if ($e->name == 'OnDocFormSave') {
         $up = $eSP->updateSearchTable($fields);
         //die();
     }
-    //удалим строки индексов для исключенных шаблонов и ресурсов
+    //remove index lines for excluded templates and resources
     $eSP->emptyExcluded();
 }

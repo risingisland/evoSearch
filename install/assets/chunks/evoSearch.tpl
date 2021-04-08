@@ -1,7 +1,7 @@
  /**
  * evoSearch
  * 
- * Вывод результатов поиска 
+ * Displaying search results
  * 
  * @category	chunk
  * @version 	0.1

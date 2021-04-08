@@ -1,6 +1,6 @@
 ### author webber (web-ber12@yandex.ru)
 
-### evoSearch - индексирование и поиск с учетом морфологии (версия 0.1)
+### evoSearch - indexing and searching based on morphology (version 0.1)
 
 ### DONATE
 ---------
@@ -10,11 +10,11 @@
 <strong>Яндекс.Деньги</strong> 410011544038803<br>
 <strong>Webmoney WMR:</strong> R133161482227<br>
 <strong>Webmoney WMZ:</strong> Z202420836069<br><br>
-с необязательной пометкой от кого и за что именно
+with an optional note from whom and for what exactly
 
 
-### Состав пакета:
-- **плагин `evoSearch`** - используется для индексирования результатов поиска. Индексируются поля `pagetitle`, `longtitle` ,`description`, `introtext`, `content` и указанные `TV-параметры`. Требуемые `TV` указываются в конфигруации плагина через админку в поле **Имена TV для поиска** через запятую. При использовании для построения списка возможных значений `TV` сниппета `multiParams` (из комплекта `eFilter`) индексируются не `id` ресурсов, а их заголовки.
+### Package composition:
+- **plugin `evoSearch`** - used to index search results. Fields are indexed `pagetitle`, `longtitle` ,`description`, `introtext`, `content` and indicated `TV-параметры`. Требуемые `TV` are specified in the plugin configuration via the admin panel in the field **TV names to search** comma separated. When used to build a list of possible values `TV` snippet `multiParams` (from the kit `eFilter`) not indexed `id` resources, and their titles.
 - **сниппет `evoSearch`** - используется для вывода результатов поиска. Может работать в двух режимах: использовать для вывода результатов `DocLister` или возвращать список `id` ресурсов (режим выбирается параметром `&action='ids'`). В последнем случае генерируется и возвращается список `id` ресурсов, подходящих под условия поиска. Эти данные могут использоваться в любом другом сниппете через плейсхолдер `evoSearchIDs`, который содержим массив `id` из результатов поиска.
 
 
@@ -23,20 +23,20 @@
 
 ### Установка
 Самый просто способ установки - использоваться модуль `Extras` в админке.
-В результате установятся необходимые компоненты: плагин, сниппет, чанки.
+В результате установятся необходимые компоненты: plugin, сниппет, чанки.
 
 Для плагина требуется событие `onDocFormSave`.
 
-Параметры:
-* `&offset=Первая строка переиндексации;text;0`
-* `&rowsperonce=Строк за сеанс индексировать;text;1`
-* `&reindex=Переиндексировать все;text;0`
-* `&excludeTmpls=Исключить шаблоны;text;`
-* `&excludeIDs=Исключить ID ресурсов;text;`
-* `&TvNames=Имена TV для поиска;text;`
-* `&unpublished=Индексировать неопубликованные;text;0`
-* `&deleted=Индексировать удаленные;text;0`
-* `&dicts=Использовать словари;text;rus,eng`
+Options:
+* `&offset=First line of reindexing;text;0`
+* `&rowsperonce=Rows per session to index;text;1`
+* `&reindex=Re-index all;text;0`
+* `&excludeTmpls=Exclude templates;text;`
+* `&excludeIDs=Exclude resource IDs;text;`
+* `&TvNames=TV names to search;text;`
+* `&unpublished=Index unpublished;text;0`
+* `&deleted=Index deleted;text;0`
+* `&dicts=Use dictionaries;text;rus,eng`
 
  ## Важно
  * До первого запуска сниппета на фронтэнде сайта необходимо провести индексацию.
