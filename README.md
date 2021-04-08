@@ -44,21 +44,21 @@ Options:
  
 ## First launch and reindexing
 
-1. При первом запуске или переиндексации выставить параметры в плагине:
-* Переиндексировать все = 1
-* Первая строка переиндексации = 0 *
-* Строк за сеанс индексировать = 10 000 *
-2. открыть и пересохранить любой документ - необходимо для вызова события `onDocFormSave`.
-3. Установить *Переиндексировать все = 0*, *Строк за сеанс индексировать = 1* 
+1. At the first launch or reindexing, set the parameters in the plugin:
+* Re-index all = 1
+* First line of reindexing = 0 *
+* Rows per session to index = 10 000 *
+2. open and resave any document - required to trigger the event `onDocFormSave`.
+3. Install *Re-index all = 0*, *Rows per session to index = 1* 
 
-\* Первая строка и количество строк за сеанс устанавливать в зависимости от возможностей хостинга.
-Например, **первая строка 0** и **строк за сеанс 10 000** проиндексирует в БД строки с 0 в количестве 10 000 штук.
+\* Set the first line and the number of lines per session depending on the hosting capabilities.
+for example, **First line 0** and **lines per session 10 000** will index in the database rows with 0 in the amount of 10,000 pieces.
 
-### Пример вызова
-    для вывода результатов [!evoSearch? &tpl=`evoSearch`!]
-Чанк `evoSearch` создается при установке дополнения.
+### Call example
+    to display results [!evoSearch? &tpl=`evoSearch`!]
+The `evoSearch` chunk is created when the add-on is installed.
 
-### ПАРАМЕТРЫ СНИППЕТА
+### SNIPPET PARAMETERS
 Сниппет `evoSearch`является оберткой для `DocLister`, поэтому то он принимает все параметры `DocLister`.
  + **&action = ids** - возвращает список найденных `ids`, которые можно подставить в другой сниппет. По-умолчанию - отрабатывает полностью с выводом результатов
  + **&noResult** - шаблон строки, которая выводится при отсутствии результата поиска. Значение по-умолчанию:
@@ -98,12 +98,12 @@ Options:
 
 подсветка найденных слов в pagetitle и extract в результатах поиска осуществляется тегом <span class="evoSearch_highlight"> - т.е. возможна ее стилизация через css-файлы
  
-### Дополнительная информация.
+### Additional Information.
 * Подсветка найденных слов в `pagetitle` и `extract` в результатах поиска осуществляется тегом `<span class="evoSearch_highlight">`. Возможна ее стилизация через css-файлы.
 * Т.к. при полнотекстовом поиске *MySQL* без дополнительных настроект обрабатываются только слова не короче 4 символов. Для улучшения результатов поиска используется дополнительный поиск средствами фильтров `DocLister`, что улучшает результаты. Особенно при их отстутствии в результате обычного поиска.
 * Совместим с `DocLister` версии **1.4.1 и ниже, 1.4.8 и выше**.
 * В версиях **1.4.5, 1.4.6, 1.4.7** встречается некорректный сброс строки `$_GET`, из-за чего некорректно срабатывает обработка пустых результатов.
 
-### Сотрудничество:
+### Cooperation:
 ---------
-По вопросам сотрудничества обращайтесь на электронный ящик web-ber12@yandex.ru
+For cooperation, please contact us by e-mail web-ber12@yandex.ru
