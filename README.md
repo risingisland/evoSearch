@@ -4,9 +4,9 @@
 
 ### DONATE
 ---------
-если считаете данный продукт полезным и хотите отблагодарить автора материально,
-либо просто пожертвовать немного средств на развитие проекта - 
-можете сделать это на любой удобный Вам электронный кошелек<br><br>
+if you think this product is useful and want to thank the author financially,
+or just donate some funds for the development of the project -
+you can do it to any electronic wallet convenient for you<br><br>
 <strong>Яндекс.Деньги</strong> 410011544038803<br>
 <strong>Webmoney WMR:</strong> R133161482227<br>
 <strong>Webmoney WMZ:</strong> Z202420836069<br><br>
@@ -18,14 +18,14 @@ with an optional note from whom and for what exactly
 - **сниппет `evoSearch`** - используется для вывода результатов поиска. Может работать в двух режимах: использовать для вывода результатов `DocLister` или возвращать список `id` ресурсов (режим выбирается параметром `&action='ids'`). В последнем случае генерируется и возвращается список `id` ресурсов, подходящих под условия поиска. Эти данные могут использоваться в любом другом сниппете через плейсхолдер `evoSearchIDs`, который содержим массив `id` из результатов поиска.
 
 
-### Необходимые компоненты для работы:
+### Required components for work:
 * `DocLister`
 
-### Установка
-Самый просто способ установки - использоваться модуль `Extras` в админке.
-В результате установятся необходимые компоненты: plugin, сниппет, чанки.
+### Installation
+The easiest way to install is to use the `Extras` module in the admin panel.
+As a result, the necessary components will be installed: plugin, snippet, chunks.
 
-Для плагина требуется событие `onDocFormSave`.
+The plugin requires the `onDocFormSave` event.
 
 Options:
 * `&offset=First line of reindexing;text;0`
@@ -38,11 +38,11 @@ Options:
 * `&deleted=Index deleted;text;0`
 * `&dicts=Use dictionaries;text;rus,eng`
 
- ## Важно
- * До первого запуска сниппета на фронтэнде сайта необходимо провести индексацию.
- * Cоздание необходимых полей `content_with_tv` и `content_with_tv_index`, а также нужных индексов производится **автоматически** при первом запуске индексации.
+ ## Important
+ * Before the first launch of the snippet on the front-end of the site, it is necessary to index it.
+ * The necessary fields `content_with_tv` and` content_with_tv_index`, as well as the necessary indices, are created **automatically** upon the first start of indexing.
  
-## Первый запуск и переиндексация
+## First launch and reindexing
 
 1. При первом запуске или переиндексации выставить параметры в плагине:
 * Переиндексировать все = 1
