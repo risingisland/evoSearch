@@ -18,7 +18,7 @@ As a result, the necessary components will be installed: plugin, snippet, chunks
 The plugin requires the `onDocFormSave` event.
 
 Options:
-* `&offset=**First line of reindexing**;text;0`
+* &offset=**First line of reindexing**;text;0
 * `&rowsperonce=**Rows per session to index**;text;1`
 * `&reindex=**Re-index all**;text;0`
 * `&excludeTmpls=**Exclude templates**;text;`
