@@ -49,50 +49,50 @@ for example, **First line 0** and **lines per session 10 000** will index in the
 The `evoSearch` chunk is created when the add-on is installed.
 
 ### SNIPPET PARAMETERS
-Сниппет `evoSearch`является оберткой для `DocLister`, поэтому то он принимает все параметры `DocLister`.
- + **&action = ids** - возвращает список найденных `ids`, которые можно подставить в другой сниппет. По-умолчанию - отрабатывает полностью с выводом результатов
- + **&noResult** - шаблон строки, которая выводится при отсутствии результата поиска. Значение по-умолчанию:
+The `evoSearch` snippet wraps `DocLister`, so it takes all `DocLister` parameters.
+ + **&action = ids** - returns a list of found `ids` that can be substituted into another snippet. By default - it works completely with the output of the results
+ + **&noResult** - the pattern of the string that is displayed when there is no search result. Default value:
  ```
- &noResult = "По запросу <u>[+stat_request+]</u> ничего не найдено. Смягчите условия поиска")
+ &noResult = "On request <u>[+stat_request+]</u> Nothing found. Soften your search terms")
  ```
- + **&extract** - отключить экстрактор. Формирует нужную часть текста с подсветкой из результатов поиска. Плейсхолдер `[+extract+]` в чанке вывода результатов `DocLister`. Значение по-умолчанию:
+ + **&extract** - disable the extractor. Generates the desired part of the text with highlighting from the search results. Placeholder `[+extract+]` in the output chunk of `DocLister` results. Default value:
   ```
  &extract = 1
  ```
- + **&maxlength** - максимальная длина извлекаемой части текста в результатах поиска. Значение по-умолчанию:
+ + **&maxlength** - the maximum length of the text portion to be extracted in the search results. Default value:
  ```
  &maxlength = 350
  ```
- + **&show_stat** - показ статистики. Значение по-умолчанию:
+ + **&show_stat** - showing statistics. Default value:
  ```
  &show_stat = 1
  ```
- + **&statTpl** - шаблон показа статистики. Значение по-умолчанию:
+ + **&statTpl** - statistics display template. Default value:
  ```html
-<div class="evoSearch_info">По запросу <b>[+stat_request+]</b> найдено всего <b>[+stat_total+]</b>. Показано <b>[+stat_display+]</b>, c [+stat_from+] по [+stat_to+]</div>
+<div class="evoSearch_info">On request <b>[+stat_request+]</b> found total <b>[+stat_total+]</b>. Shown <b>[+stat_display+]</b>, from [+stat_from+] to [+stat_to+]</div>
 ```
 где
-* `[+stat_request+]` - запрос из строки `$_GET['search']`
-* `[+stat_total+]` - количество найденных документов
-* `[+stat_display+]` - показано на текущей странице с `[+stat_from+]` по `[+stat_to+]`
+* `[+stat_request+]` - query from string `$_GET['search']`
+* `[+stat_total+]` - number of documents found
+* `[+stat_display+]` - shown on the current page from `[+stat_from+]` to `[+stat_to+]`
 
- + **&rel** - релевантность поиска.по умолчанию 0.01, Чем выше цифра - тем более релевантные результаты и тем их меньше. Значение по-умолчанию:
+ + **&rel** - search relevance. default 0.01, The higher the number - the more relevant the results and the fewer they are. Default value:
  ```
  &rel = 0.01
  ```
- + **&search_field** - поле `$_GET` для запроса. По-умолчанию запрос ищется в `$_GET['search']`.
- + **&minlength** - минимальная длина слова, которое будет участвовать в полнотекстовом поиске. Значение по-умолчанию:
+ + **&search_field** - the `$_GET` field for the request. By default, the request is searched for in `$_GET['search']`.
+ + **&minlength** - the minimum length of a word that will participate in full-text search. Default value:
   ```
  &minlength = 2
  ```
 
-подсветка найденных слов в pagetitle и extract в результатах поиска осуществляется тегом <span class="evoSearch_highlight"> - т.е. возможна ее стилизация через css-файлы
+Highlighting of found words in pagetitle and extract in search results is carried out by the tag <span class = "evoSearch_highlight"> - i.e. it is possible to style it through css files
  
 ### Additional Information.
-* Подсветка найденных слов в `pagetitle` и `extract` в результатах поиска осуществляется тегом `<span class="evoSearch_highlight">`. Возможна ее стилизация через css-файлы.
-* Т.к. при полнотекстовом поиске *MySQL* без дополнительных настроект обрабатываются только слова не короче 4 символов. Для улучшения результатов поиска используется дополнительный поиск средствами фильтров `DocLister`, что улучшает результаты. Особенно при их отстутствии в результате обычного поиска.
-* Совместим с `DocLister` версии **1.4.1 и ниже, 1.4.8 и выше**.
-* В версиях **1.4.5, 1.4.6, 1.4.7** встречается некорректный сброс строки `$_GET`, из-за чего некорректно срабатывает обработка пустых результатов.
+* Highlighting found words in `pagetitle` and `extract` in search results is carried out with the tag `<span class =" evoSearch_highlight ">`. It can be styled through css files.
+* Because in *MySQL* full-text search without additional settings, only words of at least 4 characters are processed. To improve the search results, an additional search using the `DocLister` filters is used, which improves the results. Especially when they are absent as a result of a regular search.
+* Compatible with `DocLister` version ** 1.4.1 and below, 1.4.8 and above **.
+* In versions ** 1.4.5, 1.4.6, 1.4.7** there is an incorrect reset of the `$ _GET` line, which is why the processing of empty results is incorrectly triggered.
 
 ---------
 
