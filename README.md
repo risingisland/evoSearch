@@ -11,28 +11,28 @@
 ### Required components to work:
 * `DocLister`
 
-### Installation
+## Installation
 The easiest way to install is to use the `Extras` module in the admin panel.
 As a result, the necessary components will be installed: plugin, snippet, chunks.
 
 The plugin requires the `onDocFormSave` event.
 
 Options:
-* &offset=**First line of reindexing**;text;0
-* `&rowsperonce=**Rows per session to index**;text;1`
-* `&reindex=**Re-index all**;text;0`
-* `&excludeTmpls=**Exclude templates**;text;`
-* `&excludeIDs=**Exclude resource IDs**;text;`
-* `&TvNames=**TV names to search**;text;`
-* `&unpublished=**Index unpublished**;text;0`
-* `&deleted=**Index deleted**;text;0`
-* `&dicts=**Use dictionaries**;text;rus,eng`
+* `&offset=First line of reindexing;text;0`
+* `&rowsperonce=Rows per session to index;text;1`
+* `&reindex=Re-index all;text;0`
+* `&excludeTmpls=Exclude templates;text;`
+* `&excludeIDs=Exclude resource IDs;text;`
+* `&TvNames=TV names to search;text;`
+* `&unpublished=Index unpublished;text;0`
+* `&deleted=Index deleted;text;0`
+* `&dicts=Use dictionaries;text;rus,eng`
 
- ## Important
+### Important
  * Before the first launch of the snippet on the front-end of the site, it is necessary to index it.
  * The necessary fields `content_with_tv` and` content_with_tv_index`, as well as the necessary indices, are created **automatically** upon the first start of indexing.
  
-## First launch and reindexing
+### First launch and reindexing
 
 1. At the first launch or reindexing, set the parameters in the plugin:
 * Re-index all = 1
@@ -44,8 +44,8 @@ Options:
 \* Set the first line and the number of lines per session depending on the hosting capabilities.
 for example, **First line 0** and **lines per session 10 000** will index in the database rows with 0 in the amount of 10,000 pieces.
 
-### Call example
-    to display results [!evoSearch? &tpl=`evoSearch`!]
+### Basic call example:
+To display results [!evoSearch? &tpl=`evoSearch`!]
 The `evoSearch` chunk is created when the add-on is installed.
 
 ### SNIPPET PARAMETERS
