@@ -18,15 +18,15 @@ As a result, the necessary components will be installed: plugin, snippet, chunks
 The plugin requires the `onDocFormSave` event.
 
 Options:
-* `&offset=First line of reindexing;text;0`
-* `&rowsperonce=Rows per session to index;text;1`
-* `&reindex=Re-index all;text;0`
-* `&excludeTmpls=Exclude templates;text;`
-* `&excludeIDs=Exclude resource IDs;text;`
-* `&TvNames=TV names to search;text;`
-* `&unpublished=Index unpublished;text;0`
-* `&deleted=Index deleted;text;0`
-* `&dicts=Use dictionaries;text;rus,eng`
+* `&offset=**First line of reindexing**;text;0`
+* `&rowsperonce=**Rows per session to index**;text;1`
+* `&reindex=**Re-index all**;text;0`
+* `&excludeTmpls=**Exclude templates**;text;`
+* `&excludeIDs=**Exclude resource IDs**;text;`
+* `&TvNames=**TV names to search**;text;`
+* `&unpublished=**Index unpublished**;text;0`
+* `&deleted=**Index deleted**;text;0`
+* `&dicts=**Use dictionaries**;text;rus,eng`
 
  ## Important
  * Before the first launch of the snippet on the front-end of the site, it is necessary to index it.
