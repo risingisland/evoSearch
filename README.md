@@ -97,8 +97,8 @@ The `evoSearch` chunk is created when the add-on is installed.
 
 ---------
 
-### Already installed evoSearch via exras?
-## Update your Snippet & Plugin with the following...
+## Already installed evoSearch via exras?
+### Update your Snippet & Plugin with the following...
 
 **Snippet:**
 ```
