@@ -1,16 +1,7 @@
-### author webber (web-ber12@yandex.ru)
 
-### evoSearch - indexing and searching based on morphology (version 0.1)
-
-### DONATE
+## evoSearch - indexing and searching based on morphology
+#### English version
 ---------
-if you think this product is useful and want to thank the author financially,
-or just donate some funds for the development of the project -
-you can do it to any electronic wallet convenient for you<br><br>
-<strong>Яндекс.Деньги</strong> 410011544038803<br>
-<strong>Webmoney WMR:</strong> R133161482227<br>
-<strong>Webmoney WMZ:</strong> Z202420836069<br><br>
-with an optional note from whom and for what exactly
 
 
 ### Package composition:
@@ -104,6 +95,150 @@ The `evoSearch` chunk is created when the add-on is installed.
 * Совместим с `DocLister` версии **1.4.1 и ниже, 1.4.8 и выше**.
 * В версиях **1.4.5, 1.4.6, 1.4.7** встречается некорректный сброс строки `$_GET`, из-за чего некорректно срабатывает обработка пустых результатов.
 
-### Cooperation:
 ---------
-For cooperation, please contact us by e-mail web-ber12@yandex.ru
+
+### Already installed evoSearch via exras?
+## Update your Snippet & Plugin with the following...
+
+**Snippet:**
+```
+<?php
+//site search taking into account word forms (phpMorphy dictionary) 
+//works in conjunction with the evoSearch plugin (the plugin indexes, the snippet displays the results)
+//to work, you need an installed DocLister snippet
+//call example - for displaying results [!evoSearch? &tpl=`evoSearch`!], 
+//OPTIONS
+//DocLister parameters - since it is a wrapper for DL, then it understands all DocLister parameters - paginate, display, addWhereList (restrictions on displaying templates, id and anything else in search results)
+// + &action = `ids` - returns a list of found ids that can be substituted into another snippet. By default - it works completely with the output of the results
+// + &output = `1` - works in conjunction with & action = `ids` and specifies whether to display a list of id, or just set their array to the placeholder [+evoSearchIDs+]. By default - 0 - only in placeholder
+// + &noResult = `Nothing found` - the template of the string that is displayed if there is no search result (by default "Nothing was found for the query <u>[+stat_request+]</u>. Soften your search terms")
+// + &extract = `0` - disable the extractor generates the necessary part of the text with highlighting from the search results (placeholder [+extract+] in the DocLister results output chunk) - by default 1 (do not extract) 
+// + &maxlength = `300` - maximum length of the retrieved part of the text in search results (350 by default)
+// + &show_stat = `0` - disable display of statistics "found....shown...from...to...". By default - 1 - display is enabled 
+// + &statTpl = `` - statistics display template (by default - <div class="evoSearch_info">By request <b>[+stat_request+]</b> found in total <b>[+stat_total+]</b>. Shown <b>[+stat_display+]</b>, from [+stat_from+] to [+stat_to+]</div>), where
+//                   [+stat_request+] - query from string $_GET['search']
+//                   [+stat_total+] - found total
+//                   [+stat_display+] - shown on the current page from [+stat_from+] to [+stat_to+] 
+// + &rel = `1` - search relevance, by default 0.01, the higher the number - the more relevant the results and the fewer there are
+// + &search_field = `search2` - $_GET field for the request (by default, the request is searched for in $_GET['search'])
+// + &minlength = `3` - minimum length of a word that will participate in full-text search (2 by default)
+	
+return require_once MODX_BASE_PATH . "assets/snippets/evoSearch/evoSearch.snippet.php";
+```
+
+**Plugin (GENERAL tab):**
+```
+/**
+ * before the first launch of the snippet on the front-end of the site, it is necessary to start indexing (save any resource in the admin panel)
+ *
+ * indexing is started by saving any resource (by calling the onDocFormSave event)
+ *
+ * when starting indexing for the first time or when you need to reindex, you must set the "Reindex all" parameter = 1, the initial lines and the number of lines per session are set depending on
+ * the capabilities of your hosting (for example, 0 and 10,000, respectively - will index rows from 0 in the amount of 10,000 pieces in the database
+ * you need to open and resave any document to create the onDocFormSave event
+ *
+ * for subsequent work, set "Re-index all" = 0, "Index lines per session" = 1
+ * in this case, only the document that is saved is re-indexed
+ *
+ * pagetitle, longtitle, description, introtext, content are indexed and specified explicitly in the TV plugin (by name, separated by commas)
+ *
+*/
+
+return require MODX_BASE_PATH . "assets/plugins/evoSearch/evoSearch.plugin.php";
+```
+
+**Plugin (PROPERTIES tab):**
+```
+{
+  "offset": [
+    {
+      "label": "First line of re-indexing",
+      "type": "text",
+      "value": "0",
+      "default": "0",
+      "desc": ""
+    }
+  ],
+  "rowsperonce": [
+    {
+      "label": "Amount of rows per session to index",
+      "type": "text",
+      "value": "1",
+      "default": "1",
+      "desc": ""
+    }
+  ],
+  "reindex": [
+    {
+      "label": "Re-index the whole site",
+      "type": "text",
+      "value": "0",
+      "default": "0",
+      "desc": ""
+    }
+  ],
+  "excludeTmpls": [
+    {
+      "label": "Exclude the following templates",
+      "type": "text",
+      "value": "",
+      "default": "",
+      "desc": ""
+    }
+  ],
+  "excludeIDs": [
+    {
+      "label": "Exclude these document IDs",
+      "type": "text",
+      "value": "",
+      "default": "",
+      "desc": ""
+    }
+  ],
+  "TvNames": [
+    {
+      "label": "Custom \"TV\" names to search",
+      "type": "textarea",
+      "value": "",
+      "default": "",
+      "desc": ""
+    }
+  ],
+  "unpublished": [
+    {
+      "label": "Show unpublished documents",
+      "type": "text",
+      "value": "0",
+      "default": "0",
+      "desc": ""
+    }
+  ],
+  "deleted": [
+    {
+      "label": "Show deleted documents",
+      "type": "text",
+      "value": "0",
+      "default": "0",
+      "desc": ""
+    }
+  ],
+  "dicts": [
+    {
+      "label": "Use dictionaries",
+      "type": "text",
+      "value": "eng",
+      "default": "rus,eng",
+      "desc": ""
+    }
+  ],
+  "prepare": [
+    {
+      "label": "Prepare (see Doclister docs)",
+      "type": "text",
+      "value": "",
+      "default": "",
+      "desc": ""
+    }
+  ]
+}
+```
