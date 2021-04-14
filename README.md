@@ -71,7 +71,7 @@ The `evoSearch` snippet wraps `DocLister`, so it takes all `DocLister` parameter
  ```html
 <div class="evoSearch_info">On request <b>[+stat_request+]</b> found total <b>[+stat_total+]</b>. Shown <b>[+stat_display+]</b>, from [+stat_from+] to [+stat_to+]</div>
 ```
-где
+Where
 * `[+stat_request+]` - query from string `$_GET['search']`
 * `[+stat_total+]` - number of documents found
 * `[+stat_display+]` - shown on the current page from `[+stat_from+]` to `[+stat_to+]`
