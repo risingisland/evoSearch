@@ -6,10 +6,9 @@
 
 ### Package composition:
 - **plugin `evoSearch`** - used to index search results. Fields are indexed `pagetitle`, `longtitle` ,`description`, `introtext`, `content` and indicated `TV-параметры`. Требуемые `TV` are specified in the plugin configuration via the admin panel in the field **TV names to search** comma separated. When used to build a list of possible values `TV` snippet `multiParams` (from the kit `eFilter`) not indexed `id` resources, and their titles.
-- **сниппет `evoSearch`** - используется для вывода результатов поиска. Может работать в двух режимах: использовать для вывода результатов `DocLister` или возвращать список `id` ресурсов (режим выбирается параметром `&action='ids'`). В последнем случае генерируется и возвращается список `id` ресурсов, подходящих под условия поиска. Эти данные могут использоваться в любом другом сниппете через плейсхолдер `evoSearchIDs`, который содержим массив `id` из результатов поиска.
+- **`evoSearch` snippet`** - used to display search results. It can work in two modes: use `DocLister` to display results or return a list of resource `id` (the mode is selected by the `&action='ids'` parameter). In the latter case, a list of resource ids matching the search conditions is generated and returned. This data can be used in any other snippet through the `evoSearchIDs` placeholder, which contains the `id` array from the search results. 
 
-
-### Required components for work:
+### Required components to work:
 * `DocLister`
 
 ### Installation
