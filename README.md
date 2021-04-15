@@ -1,21 +1,25 @@
-
 ## evoSearch - indexing and searching based on morphology
+
 #### English version
 
 ---------
 
 > For help and more information, visit the [Evo English Forum](https://forum.evo.im/d/61-ajaxsearch-vs-evosearch/)
 
-> Thanks to @scenduk, @modxuser and @nick0 for their info and examples.
+> Thanks to [@scenduk](https://github.com/scenduk), [@modxuser](https://github.com/modxuser) and [@nick0](https://github.com/nick0) for their info and examples.
 
 ---------
 
 
 ### Package composition:
-- **`evoSearch` Plugin** - used to index search results. Fields that are indexed: `pagetitle`, `longtitle`, `description`, `introtext`, `content` and indicated `TV-parameters`. Required TVs are specified in the plugin configuration via the admin panel in the field **TV names to search** comma separated. When used to build a list of possible values `TV` snippet `multiParams` (from the kit `eFilter`) not indexed `id` resources, and their titles.
-- **`evoSearch` Snippet** - used to display search results. It can work in two modes: use `DocLister` to display results or return a list of resource `id` (the mode is selected by the `&action='ids'` parameter). In the latter case, a list of resource ids matching the search conditions is generated and returned. This data can be used in any other snippet through the `evoSearchIDs` placeholder, which contains the `id` array from the search results. 
+- **`evoSearch` Plugin**
+  used to index search results. Fields that are indexed: `pagetitle`, `longtitle`, `description`, `introtext`, `content` and indicated `TV-parameters`. Required TVs are specified in the plugin configuration via the admin panel in the field **TV names to search** comma separated. When used to build a list of possible values `TV` snippet `multiParams` (from the kit `eFilter`) not indexed `id` resources, and their titles.
+
+- **`evoSearch` Snippet**
+  used to display search results. It can work in two modes: use `DocLister` to display results or return a list of resource `id` (the mode is selected by the `&action='ids'` parameter). In the latter case, a list of resource ids matching the search conditions is generated and returned. This data can be used in any other snippet through the `evoSearchIDs` placeholder, which contains the `id` array from the search results. 
 
 ### Required components to work:
+
 * `DocLister`
 
 ---------
@@ -23,9 +27,11 @@
 ## Installation
 
 ### Step 1: Install evoSearch from Extras
+
 This creates a plugin for indexing content, a snippet (based on DocLister) for outputting results and a chunk for styling individual results - all called evoSearch
 
 ### Step 2: First launch and reindexing
+
 You need to do this at the end of your site build, run it once you've finished work on templates, TVs and content. This part indexes all of the content and content within TVs.
 
 * Edit the plugin 'evoSearch' and go to the configuration tab. Set 'Rows per session' (the second field) to 10000 and set 'Reindex All' (the third field) to 1.
@@ -46,18 +52,20 @@ Repeat this process whenever you add new templates or TVs.
 
 
 ### Search form example:
+
 This is to be placed in your template. In Evo 1.4x-2.x, this can replace the AjaxSearch call, within the EVO startup template.
 
 ```
 <!-- Add Search Form -->
-<form action="[~8~]" method="GET">
-	<input type="text" name="search" placeholder="Search for...">
-	<button type="submit">Search</button>
+<form action="[~8~]" method="get">
+  <input type="text" name="search" placeholder="Search for...">
+  <button type="submit">Search</button>
 </form>
 ```
 
 
 ### evoSearch template chunk example:
+
 This is the template for your results page. Added to this example is a call to a TV (Main-Image) to also be displayed.
 
 ```
@@ -70,8 +78,11 @@ This is the template for your results page. Added to this example is a call to a
 
 
 ### Display results example:
+
 This is to be placed in your desired results page. For this example we are replacing the AjaxSearch results within page id 8 (referenced in the form call), from the default demo install.
+
 This example also includes some additional features:
+
 * An additional search field to be dislayed at the top of the results page.
 * Parameter `&maxlength` to adjust the length of the content output.
 * Filters to ignore content from templates 27 & 28 as well as documents with ID 6 & 88.
@@ -81,47 +92,46 @@ This example also includes some additional features:
 
 ```
 <!-- Add to results page -->
-<form action="[~8~]" method="GET">
-	<input type="text" name="search" id="search" placeholder="Search for..." value="[+stat_request+]">
-	<button type="submit">Search</button>
+<form action="[~8~]" method="get">
+  <input type="text" name="search" id="search" placeholder="Search for..." value="[+stat_request+]">
+  <button type="submit">Search</button>
 </form>
+
 <hr>
 
 [!evoSearch?
-	&tpl=`evoSearch`
-	&display=`10`
-	&maxlength=`150`
-	
-	&filters=`AND(
-		content:c.template:notin:27,28;
-		content:c.id:notin:6,88;
-		)`
-	
-	&tvPrefix=`` 
-	&tvList=`Main-Image` 
-	&renderTV=`Main-Image`
-	
-	&statTpl=`<p>Showing results [+stat_from+] - [+stat_to+] of [+stat_total+] for "[+stat_request+]"</p>`
-	&noResult=`<p>Nothing was found for "[+stat_request+]"</p>`
-	
-	&paginate=`pages`
-	&PrevNextAlwaysShow=`1` 
-	&pageAdjacents=`2` 
-	
-	&ownerTPL=`@CODE:[+dl.wrap+]`
-	
-	&TplWrapPaginate=`@CODE:<nav><ul class="pagination">[+wrap+]</ul></nav>` 
-	&TplFirstP=`@CODE:<li class="page-item"><a class="page-link" href="[+link+]" title="First">&laquo;</a></li>` 
-	&TplFirstI=`@CODE:<li class="page-item disabled"><span class="page-link" title="First">&laquo;</span></li>` 
-	&TplPrevP=`@CODE:<li class="page-item"><a class="page-link" href="[+link+]" title="Previous">&lsaquo;</a></li>` 
-	&TplPrevI=`@CODE:<li class="page-item disabled"><span class="page-link" title="Previous">&lsaquo;</span></li>` 
-	&TplNextP=`@CODE:<li class="page-item"><a class="page-link" href="[+link+]" title="Next">&rsaquo;</a></li>` 
-	&TplNextI=`@CODE:<li class="page-item disabled"><span class="page-link" title="Next">&rsaquo;</span></li>` 
-	&TplLastP=`@CODE:<li class="page-item"><a class="page-link" href="[+link+]" title="Last">&raquo;</a></li>` 
-	&TplLastI=`@CODE:<li class="page-item disabled"><span class="page-link" title="Last">&raquo;</span></li>` 
-	&TplPage=`@CODE:<li class="page-item"><a class="page-link" href="[+link+]" title="[+num+]">[+num+]</a></li>`  
-	&TplCurrentPage=`@CODE:<li class="page-item active"><span class="page-link" title="[+num+]">[+num+]</span></li>`  
-	&TplDotsPage=`@CODE:<li>...</li>`
+&display=`10`
+&maxlength=`150`
+
+&filters=`AND(
+    content:c.template:notin:27,28;
+    content:c.id:notin:6,88;
+    )`
+
+&tvPrefix=`` 
+&tvList=`Main-Image` 
+&renderTV=`Main-Image`
+
+&ownerTPL=`@CODE:[+dl.wrap+]`
+&tpl=`evoSearch`
+&statTpl=`<p>Showing results [+stat_from+] - [+stat_to+] of [+stat_total+] for "[+stat_request+]"</p>`
+&noResult=`<p>Nothing was found for "[+stat_request+]"</p>`
+
+&paginate=`pages`
+&PrevNextAlwaysShow=`1` 
+&pageAdjacents=`2` 
+&TplWrapPaginate=`@CODE:<nav><ul class="pagination">[+wrap+]</ul></nav>` 
+&TplFirstP=`@CODE:<li class="page-item"><a class="page-link" href="[+link+]" title="First">&laquo;</a></li>` 
+&TplFirstI=`@CODE:<li class="page-item disabled"><span class="page-link" title="First">&laquo;</span></li>` 
+&TplPrevP=`@CODE:<li class="page-item"><a class="page-link" href="[+link+]" title="Previous">&lsaquo;</a></li>` 
+&TplPrevI=`@CODE:<li class="page-item disabled"><span class="page-link" title="Previous">&lsaquo;</span></li>` 
+&TplNextP=`@CODE:<li class="page-item"><a class="page-link" href="[+link+]" title="Next">&rsaquo;</a></li>` 
+&TplNextI=`@CODE:<li class="page-item disabled"><span class="page-link" title="Next">&rsaquo;</span></li>` 
+&TplLastP=`@CODE:<li class="page-item"><a class="page-link" href="[+link+]" title="Last">&raquo;</a></li>` 
+&TplLastI=`@CODE:<li class="page-item disabled"><span class="page-link" title="Last">&raquo;</span></li>` 
+&TplPage=`@CODE:<li class="page-item"><a class="page-link" href="[+link+]" title="[+num+]">[+num+]</a></li>`  
+&TplCurrentPage=`@CODE:<li class="page-item active"><span class="page-link" title="[+num+]">[+num+]</span></li>`  
+&TplDotsPage=`@CODE:<li>...</li>`
 !]
 
 [+pages+]
@@ -134,43 +144,43 @@ This example also includes some additional features:
 
 * To display content from a TV (in this example an image from a TV called Main-Image) in the evoSearch results:
 
-```[+Main-Image:isnot=``:then=`<div class="thumb"><a href="[+url+]" class="th"><img src="[+Main-Image+]" alt="image for [+pagetitle+]" /></a></div>`+]```
+  ```[+Main-Image:isnot=``:then=`<div class="thumb"><a href="[+url+]" class="th"><img src="[+Main-Image+]" alt="image for [+pagetitle+]" /></a></div>`+]```
 
   OR
   
-```[[if? &is=`[+Main-Image+]:!empty` &then=`<div class="thumb"><a href="[+url+]" class="th"><img src="[+Main-Image+]" alt="image for [+pagetitle+]" /></a></div>`]]```
+  ```[[if? &is=`[+Main-Image+]:!empty` &then=`<div class="thumb"><a href="[+url+]" class="th"><img src="[+Main-Image+]" alt="image for [+pagetitle+]" /></a></div>`]]```
 
 * How to provide a url that 'redirects' to the parent:
 
-By Template: ```<a href="[[if? &is=`[+template+]:is:27` &then=`[~[+parent+]~]` &else=`[+url+]`]]">[+pagetitle+]</a>```
+  By Template: ```<a href="[[if? &is=`[+template+]:is:27` &then=`[~[+parent+]~]` &else=`[+url+]`]]">[+pagetitle+]</a>```
 
-By a TV: ```<a href="[[if? &is=`[+tv.redirect-to-parent+]:is:yes` &then=`[~[+parent+]~]` &else=`[+url+]`]]">[+pagetitle+]</a>```
+  By a TV: ```<a href="[[if? &is=`[+tv.redirect-to-parent+]:is:yes` &then=`[~[+parent+]~]` &else=`[+url+]`]]">[+pagetitle+]</a>```
 
 ---------
 
 ### SNIPPET PARAMETERS
 The `evoSearch` snippet wraps `DocLister`, so it takes all `DocLister` parameters.
- + **&action = ids** - returns a list of found `ids` that can be substituted into another snippet. By default - it works completely with the output of the results
- + **&noResult** - the pattern of the string that is displayed when there is no search result. Default value:
- ```
- &noResult = "On request <u>[+stat_request+]</u> Nothing found. Soften your search terms")
- ```
- + **&extract** - disable the extractor. Generates the desired part of the text with highlighting from the search results. Placeholder `[+extract+]` in the output chunk of `DocLister` results. Default value:
+* **&action = ids** - returns a list of found `ids` that can be substituted into another snippet. By default - it works completely with the output of the results
+* **&noResult** - the pattern of the string that is displayed when there is no search result. Default value:
   ```
- &extract = 1
- ```
- + **&maxlength** - the maximum length of the text portion to be extracted in the search results. Default value:
- ```
- &maxlength = 350
- ```
- + **&show_stat** - showing statistics. Default value:
- ```
- &show_stat = 1
- ```
- + **&statTpl** - statistics display template. Default value:
- ```html
-<div class="evoSearch_info">On request <b>[+stat_request+]</b> found total <b>[+stat_total+]</b>. Shown <b>[+stat_display+]</b>, from [+stat_from+] to [+stat_to+]</div>
-```
+  &noResult = "On request <u>[+stat_request+]</u> Nothing found. Soften your search terms")
+  ```
+* **&extract** - disable the extractor. Generates the desired part of the text with highlighting from the search results. Placeholder `[+extract+]` in the output chunk of `DocLister` results. Default value:
+  ```
+  &extract = 1
+  ```
+* **&maxlength** - the maximum length of the text portion to be extracted in the search results. Default value:
+  ```
+  &maxlength = 350
+  ```
+* **&show_stat** - showing statistics. Default value:
+  ```
+  &show_stat = 1
+  ```
+* **&statTpl** - statistics display template. Default value:
+  ```html
+  <div class="evoSearch_info">On request <b>[+stat_request+]</b> found total <b>[+stat_total+]</b>. Shown <b>[+stat_display+]</b>, from [+stat_from+] to [+stat_to+]</div>
+  ```
 
 Where
 
