@@ -181,8 +181,8 @@ Where
   ```
   &rel = 0.01
   ```
-  + **&search_field** - the `$_GET` field for the request. By default, the request is searched for in `$_GET['search']`.
-  + **&minlength** - the minimum length of a word that will participate in full-text search. Default value:
+* **&search_field** - the `$_GET` field for the request. By default, the request is searched for in `$_GET['search']`.
+* **&minlength** - the minimum length of a word that will participate in full-text search. Default value:
   ```
   &minlength = 2
   ```
