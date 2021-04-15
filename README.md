@@ -141,12 +141,15 @@ This example also includes some additional features:
 * To display content from a TV (in this example an image from a TV called Main-Image) in the evoSearch results:
 
 ```[+Main-Image:isnot=``:then=`<div class="thumb"><a href="[+url+]" class="th"><img src="[+Main-Image+]" alt="image for [+pagetitle+]" /></a></div>`+]```
+
   OR
+  
 ```[[if? &is=`[+Main-Image+]:!empty` &then=`<div class="thumb"><a href="[+url+]" class="th"><img src="[+Main-Image+]" alt="image for [+pagetitle+]" /></a></div>`]]```
 
 * How to provide a url that 'redirects' to the parent:
 
 By Template: ```<a href="[[if? &is=`[+template+]:is:27` &then=`[~[+parent+]~]` &else=`[+url+]`]]">[+pagetitle+]</a>```
+
 By a TV: ```<a href="[[if? &is=`[+tv.redirect-to-parent+]:is:yes` &then=`[~[+parent+]~]` &else=`[+url+]`]]">[+pagetitle+]</a>```
 
 ---------
