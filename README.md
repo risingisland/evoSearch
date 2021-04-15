@@ -73,6 +73,7 @@ This is the template for your resutls page. Added to this example is a call to a
 This is to be placed in your desired results page. For this example we are replacing the AjaxSearch resutls within page id 8 (referenced in the form call), from the default demo install.
 This example also includes some additional features:
 * An additional search field to be dislayed at the top of the results page.
+* Parameter `&maxlength` to adjust the length of the content output.
 * Filters to ignore ontent from templates 27 & 28 as well as documents with ID 6 & 88.
 * Include an additional TV (Main-Image).
 * Pagination below the results.
@@ -89,6 +90,7 @@ This example also includes some additional features:
 [!evoSearch?
 	&tpl=`evoSearch`
 	&display=`10`
+	&maxlength=`150`
 	
 	&filters=`AND(
 		content:c.template:notin:27,28;
@@ -131,6 +133,21 @@ This example also includes some additional features:
 [+pages+]
 
 ```
+
+---------
+
+#### A few other useful examples that can be used within the tpl chunk:
+
+* To display content from a TV (in this example an image from a TV called Main-Image) in the evoSearch results:
+
+```[+Main-Image:isnot=``:then=`<div class="thumb"><a href="[+url+]" class="th"><img src="[+Main-Image+]" alt="image for [+pagetitle+]" /></a></div>`+]```
+  OR
+```[[if? &is=`[+Main-Image+]:!empty` &then=`<div class="thumb"><a href="[+url+]" class="th"><img src="[+Main-Image+]" alt="image for [+pagetitle+]" /></a></div>`]]```
+
+* How to provide a url that 'redirects' to the parent:
+
+By Template: ```<a href="[[if? &is=`[+template+]:is:27` &then=`[~[+parent+]~]` &else=`[+url+]`]]">[+pagetitle+]</a>```
+By a TV: ```<a href="[[if? &is=`[+tv.redirect-to-parent+]:is:yes` &then=`[~[+parent+]~]` &else=`[+url+]`]]">[+pagetitle+]</a>```
 
 ---------
 
