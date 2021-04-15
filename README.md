@@ -19,21 +19,13 @@
 * `DocLister`
 
 ## Installation
-The easiest way to install is to use the `Extras` module in the admin panel.
-As a result, the necessary components will be installed: plugin, snippet, chunks.
 
-The plugin requires the `onDocFormSave` event.
+#Step 1:
+The easiest way to install is to use the `Extras` module via the admin panel.
+This creates a plugin for indexing content, a snippet (based on DocLister) for outputting results and a chunk for styling individual results - all called evoSearch
 
-Options:
-* `&offset=First line of reindexing;text;0`
-* `&rowsperonce=Rows per session to index;text;1`
-* `&reindex=Re-index all;text;0`
-* `&excludeTmpls=Exclude templates;text;`
-* `&excludeIDs=Exclude resource IDs;text;`
-* `&TvNames=TV names to search;text;`
-* `&unpublished=Index unpublished;text;0`
-* `&deleted=Index deleted;text;0`
-* `&dicts=Use dictionaries;text;rus,eng`
+
+
 
 ### Important
  * Before the first launch of the snippet on the front-end of the site, it is necessary to index it.
