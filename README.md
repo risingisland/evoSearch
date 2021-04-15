@@ -108,12 +108,6 @@ This example also includes some additional features:
 	&PrevNextAlwaysShow=`1` 
 	&pageAdjacents=`2` 
 	
-	&TplPrevP=`@CODE:<li><a href="[+link+]">Prev</a></li>`
-	&TplPage=`@CODE:<li><a href="[+link+]">[+num+]</a></li>`
-	&TplCurrentPage=`@CODE:<li class="current">[+num+]</li>`
-	&TplNextP=`@CODE:<li><a href="[+link+]">Next</a></li>`
-	&TplDotsPage=`@CODE:<li><a href="[+link+]"> ... </a></li>`
-	&TplWrapPaginate=`@CODE:<nav class="pagination"><ul>[+wrap+]</ul></nav>`
 	&ownerTPL=`@CODE:[+dl.wrap+]`
 	
 	&TplWrapPaginate=`@CODE:<nav><ul class="pagination">[+wrap+]</ul></nav>` 
