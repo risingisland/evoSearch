@@ -74,7 +74,7 @@ This is to be placed in your desired results page. For this example we are repla
 This example also includes some additional features:
 * An additional search field to be dislayed at the top of the results page.
 * Parameter `&maxlength` to adjust the length of the content output.
-* Filters to ignore ontent from templates 27 & 28 as well as documents with ID 6 & 88.
+* Filters to ignore content from templates 27 & 28 as well as documents with ID 6 & 88.
 * Include an additional TV (Main-Image).
 * Pagination below the results.
 
