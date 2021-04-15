@@ -171,25 +171,27 @@ The `evoSearch` snippet wraps `DocLister`, so it takes all `DocLister` parameter
  ```html
 <div class="evoSearch_info">On request <b>[+stat_request+]</b> found total <b>[+stat_total+]</b>. Shown <b>[+stat_display+]</b>, from [+stat_from+] to [+stat_to+]</div>
 ```
+
 Where
+
 * `[+stat_request+]` - query from string `$_GET['search']`
 * `[+stat_total+]` - number of documents found
 * `[+stat_display+]` - shown on the current page from `[+stat_from+]` to `[+stat_to+]`
-
- + **&rel** - search relevance. default 0.01, The higher the number - the more relevant the results and the fewer they are. Default value:
- ```
- &rel = 0.01
- ```
- + **&search_field** - the `$_GET` field for the request. By default, the request is searched for in `$_GET['search']`.
- + **&minlength** - the minimum length of a word that will participate in full-text search. Default value:
+* **&rel** - search relevance. default 0.01, The higher the number - the more relevant the results and the fewer they are. Default value:
   ```
- &minlength = 2
- ```
+  &rel = 0.01
+  ```
+  + **&search_field** - the `$_GET` field for the request. By default, the request is searched for in `$_GET['search']`.
+  + **&minlength** - the minimum length of a word that will participate in full-text search. Default value:
+  ```
+  &minlength = 2
+  ```
 
-Highlighting of found words in pagetitle and extract in search results is carried out by the tag <span class = "evoSearch_highlight"> - i.e. it is possible to style it through css files
+Highlighting of words founds within the pagetitle and extract, in the search results, is carried out using the tag `<span class="evoSearch_highlight">` - i.e. it is possible to style it through css files
  
 ### Additional Information.
-* Highlighting found words in `pagetitle` and `extract` in search results is carried out with the tag `<span class =" evoSearch_highlight ">`. It can be styled through css files.
+
+* Highlighting found words in `pagetitle` and `extract` in search results is carried out with the tag `<span class="evoSearch_highlight">`. It can be styled through css files.
 * Because in *MySQL* full-text search without additional settings, only words of at least 4 characters are processed. To improve the search results, an additional search using the `DocLister` filters is used, which improves the results. Especially when they are absent as a result of a regular search.
 * Compatible with `DocLister` version ** 1.4.1 and below, 1.4.8 and above **.
 * In versions ** 1.4.5, 1.4.6, 1.4.7** there is an incorrect reset of the `$ _GET` line, which is why the processing of empty results is incorrectly triggered.
@@ -197,9 +199,10 @@ Highlighting of found words in pagetitle and extract in search results is carrie
 ---------
 
 ## Already installed evoSearch via Exras?
-### Update your Snippet & Plugin with the following...
+### Update your Snippet & Plugin with the following translated text...
 
 **Snippet:**
+
 ```
 <?php
 //site search taking into account word forms (phpMorphy dictionary) 
@@ -226,6 +229,7 @@ return require_once MODX_BASE_PATH . "assets/snippets/evoSearch/evoSearch.snippe
 ```
 
 **Plugin (GENERAL tab):**
+
 ```
 /**
  * before the first launch of the snippet on the front-end of the site, it is necessary to start indexing (save any resource in the admin panel)
@@ -247,6 +251,7 @@ return require MODX_BASE_PATH . "assets/plugins/evoSearch/evoSearch.plugin.php";
 ```
 
 **Plugin (PROPERTIES tab):**
+
 ```
 {
   "offset": [
