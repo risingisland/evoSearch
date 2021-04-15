@@ -58,7 +58,7 @@ This is to be placed in your template. In Evo 1.4x-2.x, this can replace the Aja
 
 
 ### evoSearch template chunk example:
-This is the template for your resutls page. Added to this example is a call to a TV (Main-Image) to also be displayed.
+This is the template for your results page. Added to this example is a call to a TV (Main-Image) to also be displayed.
 
 ```
 <!-- Template Chunk -->
@@ -69,8 +69,8 @@ This is the template for your resutls page. Added to this example is a call to a
 ```
 
 
-### Display resutls example:
-This is to be placed in your desired results page. For this example we are replacing the AjaxSearch resutls within page id 8 (referenced in the form call), from the default demo install.
+### Display results example:
+This is to be placed in your desired results page. For this example we are replacing the AjaxSearch results within page id 8 (referenced in the form call), from the default demo install.
 This example also includes some additional features:
 * An additional search field to be dislayed at the top of the results page.
 * Parameter `&maxlength` to adjust the length of the content output.
@@ -80,7 +80,7 @@ This example also includes some additional features:
 
 
 ```
-<!-- Add to resutls page -->
+<!-- Add to results page -->
 <form action="[~8~]" method="GET">
 	<input type="text" name="search" id="search" placeholder="Search for..." value="[+stat_request+]">
 	<button type="submit">Search</button>
