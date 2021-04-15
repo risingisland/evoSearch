@@ -125,7 +125,7 @@ This example also includes some additional features:
 !]
 
 [+pages+]
-
+<p>Viewing [+stat_from+] - [+stat_to+] of [+stat_total+]</p>
 ```
 
 ---------
