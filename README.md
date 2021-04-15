@@ -18,34 +18,121 @@
 ### Required components to work:
 * `DocLister`
 
+---------
+
 ## Installation
 
-#Step 1:
-The easiest way to install is to use the `Extras` module via the admin panel.
+### Step 1: Install evoSearch from Extras
 This creates a plugin for indexing content, a snippet (based on DocLister) for outputting results and a chunk for styling individual results - all called evoSearch
 
+### Step 2: First launch and reindexing
+You need to do this at the end of your site build, run it once you've finished work on templates, TVs and content. This part indexes all of the content and content within TVs.
+
+* Edit the plugin 'evoSearch' and go to the configuration tab. Set 'Rows per session' (the second field) to 10000 and set 'Reindex All' (the third field) to 1.
+
+* In 'Exclude resource IDs' (the fifth field) add a comma separated list of page IDs that should be excluded from search results - if you change this later then you need to run the re-indexing process again.
+
+* In 'TV names to search' (the sixth field - textarea) add a comma separated list of custom TVs that contain content that needs to be indexed and searchable - by default evoSearch will only look within standard TVs such as pagetitle and content. Again, if you edit this later then you need to run the re-indexing process again.
+
+* Save.
+
+* Now edit any resource/page and save it, this will run the plugin and index all of the site content.
+
+* Go back and edit the plugin 'evoSearch' and change 'Rows per session' (the second field) back to 1 and 'Reindex All' (the third field) back to 0. This will revert back to just indexing the page you've edited on save, rather than the entire site every time you save a resource.
+
+Repeat this process whenever you add new templates or TVs.
+
+---------
 
 
+### Search form example:
+This is to be placed in your template. In Evo 1.4x-2.x, this can replace the AjaxSearch call, within the EVO startup template.
 
-### Important
- * Before the first launch of the snippet on the front-end of the site, it is necessary to index it.
- * The necessary fields `content_with_tv` and` content_with_tv_index`, as well as the necessary indices, are created **automatically** upon the first start of indexing.
- 
-### First launch and reindexing
+```
+<!-- Add Search Form -->
+<form action="[~8~]" method="GET">
+	<input type="text" name="search" placeholder="Search for...">
+	<button type="submit">Search</button>
+</form>
+```
 
-1. At the first launch or reindexing, set the parameters in the plugin:
-* Re-index all = 1
-* First line of reindexing = 0 *
-* Rows per session to index = 10 000 *
-2. open and resave any document - required to trigger the event `onDocFormSave`.
-3. Install *Re-index all = 0*, *Rows per session to index = 1* 
 
-\* Set the first line and the number of lines per session depending on the hosting capabilities.
-for example, **First line 0** and **lines per session 10 000** will index in the database rows with 0 in the amount of 10,000 pieces.
+### evoSearch template chunk example:
+This is the template for your resutls page. Added to this example is a call to a TV (Main-Image) to also be displayed.
 
-### Basic call example:
-To display results [!evoSearch? &tpl=`evoSearch`!]
-The `evoSearch` chunk is created when the add-on is installed.
+```
+<!-- Template Chunk -->
+[[if? &is=`[+Main-Image+]:!empty` &then=`<div class="thumb"><a href="[+url+]" class="th"><img src="[+Main-Image+]" alt="image for [+pagetitle+]" />
+<div class="search_title"><a href="[+url+]">[+pagetitle+]</a></div>
+<div class="search_extract">[+extract+]</div>
+<hr>
+```
+
+
+### Display resutls example:
+This is to be placed in your desired results page. For this example we are replacing the AjaxSearch resutls within page id 8 (referenced in the form call), from the default demo install.
+This example also includes some additional features:
+* An additional search field to be dislayed at the top of the results page.
+* Filters to ignore ontent from templates 27 & 28 as well as documents with ID 6 & 88.
+* Include an additional TV (Main-Image).
+* Pagination below the results.
+
+
+```
+<!-- Add to resutls page -->
+<form action="[~8~]" method="GET">
+	<input type="text" name="search" id="search" placeholder="Search for..." value="[+stat_request+]">
+	<button type="submit">Search</button>
+</form>
+<hr>
+
+[!evoSearch?
+	&tpl=`evoSearch`
+	&display=`10`
+	
+	&filters=`AND(
+		content:c.template:notin:27,28;
+		content:c.id:notin:6,88;
+		)`
+	
+	&tvPrefix=`` 
+	&tvList=`Main-Image` 
+	&renderTV=`Main-Image`
+	
+	&statTpl=`<p>Showing results [+stat_from+] - [+stat_to+] of [+stat_total+] for "[+stat_request+]"</p>`
+	&noResult=`<p>Nothing was found for "[+stat_request+]"</p>`
+	
+	&paginate=`pages`
+	&PrevNextAlwaysShow=`1` 
+	&pageAdjacents=`2` 
+	
+	&TplPrevP=`@CODE:<li><a href="[+link+]">Prev</a></li>`
+	&TplPage=`@CODE:<li><a href="[+link+]">[+num+]</a></li>`
+	&TplCurrentPage=`@CODE:<li class="current">[+num+]</li>`
+	&TplNextP=`@CODE:<li><a href="[+link+]">Next</a></li>`
+	&TplDotsPage=`@CODE:<li><a href="[+link+]"> ... </a></li>`
+	&TplWrapPaginate=`@CODE:<nav class="pagination"><ul>[+wrap+]</ul></nav>`
+	&ownerTPL=`@CODE:[+dl.wrap+]`
+	
+	&TplWrapPaginate=`@CODE:<nav><ul class="pagination">[+wrap+]</ul></nav>` 
+	&TplFirstP=`@CODE:<li class="page-item"><a class="page-link" href="[+link+]" title="First">&laquo;</a></li>` 
+	&TplFirstI=`@CODE:<li class="page-item disabled"><span class="page-link" title="First">&laquo;</span></li>` 
+	&TplPrevP=`@CODE:<li class="page-item"><a class="page-link" href="[+link+]" title="Previous">&lsaquo;</a></li>` 
+	&TplPrevI=`@CODE:<li class="page-item disabled"><span class="page-link" title="Previous">&lsaquo;</span></li>` 
+	&TplNextP=`@CODE:<li class="page-item"><a class="page-link" href="[+link+]" title="Next">&rsaquo;</a></li>` 
+	&TplNextI=`@CODE:<li class="page-item disabled"><span class="page-link" title="Next">&rsaquo;</span></li>` 
+	&TplLastP=`@CODE:<li class="page-item"><a class="page-link" href="[+link+]" title="Last">&raquo;</a></li>` 
+	&TplLastI=`@CODE:<li class="page-item disabled"><span class="page-link" title="Last">&raquo;</span></li>` 
+	&TplPage=`@CODE:<li class="page-item"><a class="page-link" href="[+link+]" title="[+num+]">[+num+]</a></li>`  
+	&TplCurrentPage=`@CODE:<li class="page-item active"><span class="page-link" title="[+num+]">[+num+]</span></li>`  
+	&TplDotsPage=`@CODE:<li>...</li>`
+!]
+
+[+pages+]
+
+```
+
+---------
 
 ### SNIPPET PARAMETERS
 The `evoSearch` snippet wraps `DocLister`, so it takes all `DocLister` parameters.
