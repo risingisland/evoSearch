@@ -5,6 +5,7 @@
 ---------
 
 > For help and more information, visit the [Evo English Forum](https://forum.evo.im/d/61-ajaxsearch-vs-evosearch/)
+
 > Thanks to @scenduk, @modxuser and @nick0 for their info and examples.
 
 ---------
