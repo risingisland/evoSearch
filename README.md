@@ -208,7 +208,7 @@ Highlighting of words founds within the pagetitle and extract, in the search res
 
 ---------
 
-## Already installed evoSearch via Exras?
+## Already installed evoSearch via Extras?
 ### Update your Snippet & Plugin with the following translated text...
 
 **Snippet:**
