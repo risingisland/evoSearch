@@ -58,7 +58,7 @@ This is to be placed in your template. In Evo 1.4x-2.x, this can replace the Aja
 ```
 <!-- Add Search Form -->
 <form action="[~8~]" method="get">
-  <input type="text" name="search" placeholder="Search for...">
+  <input type="text" name="search" id="search" placeholder="Search for...">
   <button type="submit">Search</button>
 </form>
 ```
