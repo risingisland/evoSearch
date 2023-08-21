@@ -59,7 +59,7 @@ public function init($min_length = 2, $ext_content_field = 'content_with_tv', $e
             'statTpl' => '<div class="evoSearch_info">По запросу <b>[+stat_request+]</b> найдено всего <b>[+stat_total+]</b>. Показано <b>[+stat_display+]</b>, c [+stat_from+] по [+stat_to+]</div>',
             'rel' => '0.01',
             'min_length' => $min_length,
-            'dedug' => '0'
+            'debug' => '0'
             )
     );
     $this->min_length = $this->params['min_length'];
@@ -392,7 +392,7 @@ public function makeAddLikeCond($search_field = 'pagetitle', $separator = 'AND',
     $out = '';
     foreach ($this->search_words as $word) {
         $word = mb_strtolower($word, "UTF-8");
-        $tmp[] = " LOWER(`" . $search_field . "`) REGEXP '[[:<:]]" . $word . "[[:>:]]'";
+        $tmp[] = " LOWER(`" . $search_field . "`) REGEXP '\\\\b" . $word . "\\\\b'";
     }
     if (!empty($tmp)) {
         $out = implode(' ' . trim($inner_separator) . ' ', $tmp);
